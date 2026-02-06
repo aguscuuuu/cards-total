@@ -1,0 +1,181 @@
+* {
+    font-family: "Playfair Display", serif;
+    font-weight: 300;
+}
+body {
+    background: #347234;
+    position: relative;
+    margin: 0;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background-image: url("./img/background.jpg");
+    background-size: cover;      
+    background-position: center;
+    background-repeat: no-repeat; 
+    opacity: 0.3;
+    mix-blend-mode: multiply;
+    z-index: -1;
+}
+
+body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background-image: url("./img/background.jpg");
+    background-size: cover;       
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.05;
+    mix-blend-mode: overlay;
+    z-index: -1;
+}
+
+.vignette {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background: radial-gradient(
+        circle at center,
+        transparent 20%,
+        rgba(0, 0, 0, 0.6) 100%
+    );
+    z-index: 1; 
+}
+
+.deck-selector {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 3;
+    display: flex;
+    gap: 10px;
+}
+
+.deck-btn {
+    padding: 10px 20px;
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s;
+    backdrop-filter: blur(5px);
+}
+
+.deck-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.deck-btn.active {
+    background: rgba(255, 255, 255, 0.4);
+    border-color: rgba(255, 255, 255, 0.6);
+}
+
+.cards-section {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+}
+
+.cards-container {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.card {
+    width: 120px;
+    height: auto;
+    transition: transform 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.answer-box {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 30px 40px;
+    border-radius: 5px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    z-index: 2;
+}
+
+.input-section {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+#userAnswer {
+    padding: 12px 20px;
+    font-size: 1.2em;
+    border: none;
+    border-radius: 5px;
+    width: 200px;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.9);
+}
+
+#submitBtn {
+    padding: 12px 30px;
+    font-size: 1.2em;
+    background: #2d5f2e;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+#submitBtn:hover {
+    background: #3d7f3e;
+}
+
+.feedback {
+    font-size: 4em;
+    min-height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.correct {
+    color: #4CAF50;
+    text-shadow: 0 0 10px rgba(76, 175, 80, 0.5);
+}
+
+.incorrect {
+    color: #f44336;
+    text-shadow: 0 0 10px rgba(244, 67, 54, 0.5);
+}
+
+.card {
+    width: 120px;
+    height: auto;
+    transition: transform 0.2s, filter 0.2s;
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+    cursor: pointer;
+}
+.card:hover {
+    transform: translateY(-5px);
+    filter: drop-shadow(0 8px 12px rgba(0, 0, 0, 0.5));
+}
