@@ -14,8 +14,8 @@
     <div class="vignette"></div>
     
     <div class="deck-selector">
-        <button id="pokerDeck" class="deck-btn active">Poker Deck</button>
-        <button id="spanishDeck" class="deck-btn">Spanish Deck</button>
+        <button id="pokerDeck" class="deck-btn">Poker Deck</button>
+        <button id="spanishDeck" class="deck-btn active">Spanish Deck</button>
     </div>
 
     <div class="cards-section">
@@ -25,11 +25,12 @@
     </div>
 
     <div class="answer-box">
-        <div class="input-section">
-            <input type="number" id="userAnswer" placeholder="Suma total...">
-            <button id="submitBtn">Enviar</button>
-        </div>
+        <button id="maxCardsBtn" class="deck-btn">Max: 4</button>
+        <span class="counter" id="correctCounter">✔ 0</span>
+        <input type="number" id="userAnswer" placeholder="Total...">
+        <button id="submitBtn">Enter</button>
         <div class="feedback" id="feedback"></div>
+        <span class="counter" id="incorrectCounter">✖ 0</span>
     </div>
 
     <script src="./script.js"></script>

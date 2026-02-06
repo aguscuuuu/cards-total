@@ -2,6 +2,17 @@
     font-family: "Lora", serif;
     font-weight: 300;
 }
+
+::selection {
+    background: #4CAF50;
+    color: white;
+}
+
+::-moz-selection {
+    background: #4CAF50;
+    color: white;
+}
+
 body {
     background: #347234;
     position: relative;
@@ -63,6 +74,7 @@ body::after {
 
 .deck-btn {
     padding: 10px 20px;
+    font-size: 1em;
     background: rgba(255, 255, 255, 0.2);
     color: white;
     border: 2px solid rgba(255, 255, 255, 0.3);
@@ -99,11 +111,21 @@ body::after {
 .card {
     width: 120px;
     height: auto;
-    transition: transform 0.2s;
+    transition: transform 0.2s, filter 0.2s;
+    filter: 
+        drop-shadow(0 8px 16px rgba(0, 0, 0, 0.4))
+        brightness(0.95)
+        contrast(1.1)
+        sepia(0.15);
 }
 
 .card:hover {
     transform: translateY(-5px);
+    filter: 
+        drop-shadow(0 12px 20px rgba(0, 0, 0, 0.5))
+        brightness(0.95)
+        contrast(1.1)
+        sepia(0.15);
 }
 
 .answer-box {
@@ -111,33 +133,59 @@ body::after {
     bottom: 20px;
     left: 50%;
     transform: translateX(-50%);
-    padding: 30px 40px;
-    border-radius: 5px;
-    backdrop-filter: blur(10px);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    padding: 15px 30px;
+    border-radius: 6px;
+    background-image: url("./img/leather.jpg");
+    background-size: cover;
+    background-position: center;
+    box-shadow: 8px 8px 15px rgba(0, 0, 0, 0.5);
     z-index: 2;
+    display: flex;
+    align-items: center;
+    gap: 15px;
 }
 
-.input-section {
-    display: flex;
-    gap: 10px;
-    justify-content: center;
-    margin-bottom: 20px;
+.answer-box::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(60, 40, 20, 0.6);
+    border-radius: 10px;
+    z-index: -1;
+}
+
+.counter {
+    color: #f5e6d3;
+    font-size: 1.2em;
+    min-width: 50px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
 }
 
 #userAnswer {
-    padding: 12px 20px;
-    font-size: 1.2em;
+    padding: 10px;
+    font-size: 1em;
     border: none;
     border-radius: 5px;
-    width: 200px;
+    width: 80px;
     text-align: center;
-    background: white;
+    background: rgba(255, 255, 255, 0.95);
+}
+
+/* Quitar flechitas del input number en Firefox */
+#userAnswer {
+    -moz-appearance: textfield;
+}
+
+/* Quitar flechitas del input number en Chrome/Safari */
+#userAnswer::-webkit-outer-spin-button,
+#userAnswer::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
 }
 
 #submitBtn {
-    padding: 12px 30px;
-    font-size: 1.2em;
+    padding: 10px 20px;
+    font-size: 1em;
     background: #2d5f2e;
     color: white;
     border: none;
@@ -151,8 +199,8 @@ body::after {
 }
 
 .feedback {
-    font-size: 2em;
-    min-height: 60px;
+    font-size: 1.8em;
+    min-width: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -160,31 +208,10 @@ body::after {
 
 .correct {
     color: #4CAF50;
-    text-shadow: 0 0 10px rgba(76, 175, 80, 0.5);
+    text-shadow: 0 0 15px rgba(76, 175, 80, 0.8);
 }
 
 .incorrect {
     color: #f44336;
-    text-shadow: 0 0 10px rgba(244, 67, 54, 0.5);
-}
-
-.card {
-    width: 120px;
-    height: auto;
-    transition: transform 0.2s, filter 0.2s;
-    filter: 
-        drop-shadow(0 8px 16px rgba(0, 0, 0, 0.4))
-        brightness(0.95)
-        contrast(1.1)
-        sepia(0.15);
-    cursor: pointer;
-}
-
-.card:hover {
-    transform: translateY(-5px);
-    filter: 
-        drop-shadow(0 12px 20px rgba(0, 0, 0, 0.5))
-        brightness(0.95)
-        contrast(1.1)
-        sepia(0.15);
+    text-shadow: 0 0 15px rgba(244, 67, 54, 0.8);
 }

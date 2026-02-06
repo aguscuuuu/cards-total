@@ -1,7 +1,6 @@
 // Definir los dos mazos
 const decks = {
     poker: {
-        values: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10], // J, Q, K = 10
         cards: [
             { name: 'hearts-A', value: 1 },
             { name: 'hearts-2', value: 2 },
@@ -100,13 +99,14 @@ const decks = {
 };
 
 let currentDeck = 'spanish';
-let currentCards = [];
+let maxCards = 4;
+let correctCount = 0;
+let incorrectCount = 0;
 let correctSum = 0;
 
 // Generar cartas aleatorias
 function generateRandomCards() {
-    const numCards = Math.floor(Math.random() * 4) + 1; // 1 a 4 cartas
-    currentCards = [];
+    const numCards = Math.floor(Math.random() * maxCards) + 1; // 1 a maxCards
     correctSum = 0;
     
     const cardsContainer = document.getElementById('cardsContainer');
@@ -118,7 +118,6 @@ function generateRandomCards() {
         const randomIndex = Math.floor(Math.random() * deck.cards.length);
         const card = deck.cards[randomIndex];
         
-        currentCards.push(card.value);
         correctSum += card.value;
         
         // Crear imagen de carta SVG
@@ -137,25 +136,27 @@ function checkAnswer() {
     const feedback = document.getElementById('feedback');
     
     if (isNaN(userAnswer)) {
-        feedback.textContent = '⚠️';
-        feedback.className = 'feedback';
         return;
     }
     
     if (userAnswer === correctSum) {
         feedback.textContent = '✓';
         feedback.className = 'feedback correct';
+        correctCount++;
+        document.getElementById('correctCounter').textContent = `✓ ${correctCount}`;
         
-        // Generar nuevas cartas después de 1.5 segundos
+        // Generar nuevas cartas después de 1 segundo
         setTimeout(() => {
             generateRandomCards();
             document.getElementById('userAnswer').value = '';
             feedback.textContent = '';
             feedback.className = 'feedback';
-        }, 1500);
+        }, 1000);
     } else {
         feedback.textContent = '✗';
         feedback.className = 'feedback incorrect';
+        incorrectCount++;
+        document.getElementById('incorrectCounter').textContent = `✗ ${incorrectCount}`;
     }
 }
 
@@ -176,6 +177,18 @@ function switchDeck(deckType) {
     document.getElementById('feedback').className = 'feedback';
 }
 
+// Cambiar número máximo de cartas
+function cycleMaxCards() {
+    maxCards = (maxCards % 5) + 1; // Cicla entre 1 y 5
+    document.getElementById('maxCardsBtn').textContent = `Max: ${maxCards}`;
+    
+    // Generar nuevas cartas
+    generateRandomCards();
+    document.getElementById('userAnswer').value = '';
+    document.getElementById('feedback').textContent = '';
+    document.getElementById('feedback').className = 'feedback';
+}
+
 // Event listeners
 document.getElementById('submitBtn').addEventListener('click', checkAnswer);
 document.getElementById('userAnswer').addEventListener('keypress', (e) => {
@@ -186,6 +199,7 @@ document.getElementById('userAnswer').addEventListener('keypress', (e) => {
 
 document.getElementById('pokerDeck').addEventListener('click', () => switchDeck('poker'));
 document.getElementById('spanishDeck').addEventListener('click', () => switchDeck('spanish'));
+document.getElementById('maxCardsBtn').addEventListener('click', cycleMaxCards);
 
 // Inicializar juego
 generateRandomCards();
